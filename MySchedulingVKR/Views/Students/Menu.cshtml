@@ -1,0 +1,161 @@
+﻿@model MySchedulingVKR.ViewModels.StudentSubjectView
+
+@{
+    ViewData["Title"] = "Menu";
+}
+
+<style>
+    h1 {
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    a {
+        color: #77804f;
+        text-decoration: none;
+    }
+
+    .centered-content {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .info-section, .action-buttons, .schedule-list {
+        margin-bottom: 20px;
+    }
+
+    .table, .inner-table, th, td {
+        border: 1px solid #77804f;
+        border-collapse: collapse; 
+    }
+
+    .table{
+        width: 100%;
+    }
+
+    .table th, .table td {
+        padding: 12px 15px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table th {
+            background-color: #77804f;
+            font-weight: bold;
+            color: white;
+    }
+
+    .inner-table {
+        width: 100%;
+        height: 100%;
+        border-collapse: collapse; 
+    }
+
+        .inner-table th, .inner-table td {
+            padding: 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .inner-table th {
+            background-color: #77804f;
+        }
+
+        .inner-table tr:nth-child(even) {
+            background-color: #f2f2f2; 
+        }
+
+</style>
+
+<h1>Меню студента</h1>
+
+<div class="centered-content">
+    <div class="info-section">
+        <h4>Информация о студенте</h4>
+
+        <dl class="row">
+            <dt class="col-sm-2">
+                Логин
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Student.Login)
+            </dd>
+            <dt class="col-sm-2">
+                Пароль
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Student.Password)
+            </dd>
+            <dt class="col-sm-2">
+                Имя
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Student.Name)
+            </dd>
+            <dt class="col-sm-2">
+                Фамилия
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Student.Surname)
+            </dd>
+        </dl>
+        <a asp-action="Edit" asp-route-id="@Model.Student.Id">Редактировать информацию</a>
+        <a asp-action="Delete" asp-route-id="@Model.Student.Id">Удалить аккаунт</a>
+    </div>
+
+    <div class="action-buttons">
+        <a asp-action="ScheduleStudent" asp-route-id="@Model.Student.Id">Расписание занятий</a>
+    </div>
+
+    <div class="schedule-list">
+
+        <h4>Предметы и Организации</h4>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Предмет</th>
+                    <th>Организации и преподаватели</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Subjects)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                            <table class="inner-table">
+                                <thead>
+                                    <tr>
+                                        <th>Название организации</th>
+                                        <th>Список преподавателей</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var organization in item.OrganizationSubjects.Select(o => o.Organization))
+                                    {
+                                        <tr>
+                                            <td>@organization.Name</td>
+                                            <td>
+                                                <ul>
+                                                    @foreach (var teacher in organization.Teachers.Where(t => t.SubjectId == item.Id && t.TeacherAccesses.Any(a => a.Access == true)))
+                                                    {
+                                                        <li>
+                                                            <a href="@Url.Action("RegistrationLesson", "Students", new {subjectId = item.Id, organizationId = organization.Id, teacherId = teacher.Id, studentId = Model.Student.Id })">@teacher.Name @teacher.Surname</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

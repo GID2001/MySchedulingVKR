@@ -1,0 +1,29 @@
+﻿@model MySchedulingVKR.Models.Subject
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div style="margin-left: 50px;">
+    <h3>Добавление предмета</h3><br />
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label style="margin-bottom: 5px;" asp-for="Name" class="control-label">Название предмета</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div><br />
+                <div class="form-group">
+                    <input style="font-size: 16px;" type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

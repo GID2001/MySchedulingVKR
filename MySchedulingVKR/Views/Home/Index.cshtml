@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    a {
+        color: #77804f;
+        text-decoration: none;
+    }
+
+    .myContainer {
+        display: flex; /* Используем flexbox для горизонтального расположения */
+        justify-content: space-between; /* Распределяет пространство между колонками */
+        align-items: stretch;
+        height: 75vh; /* Задаем высоту контейнера равной высоте окна просмотра */
+        gap: 100px;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%
+    }
+
+    .myColumn {
+        display: flex; /* Используем flexbox для вертикального расположения */
+        flex-direction: column; /* Столбец */
+        justify-content: flex-start; /* Выравниваем содержимое по верхнему краю */
+        flex: 1; /* Колонки будут занимать равное пространство */
+        box-sizing: border-box; /* Чтобы padding не влиял на ширину колонок */
+        padding-top: 200px;
+    }
+
+
+        .myColumn h2 {
+            font-size: 32px;
+            color: #122400;
+            text-align: center; /* Центрируем заголовки */
+            padding-bottom: 10px;
+        }
+
+        .myColumn h3 {
+            font-size: 22px;
+            font-weight: normal;
+            color: #122400;
+            text-align: justify;
+        }
+
+        .myColumn ul {
+            padding-left: 0; /* Убираем отступ слева списка */
+        }
+
+        .myColumn li {
+            font-size: 18px;
+            text-align: left;
+            color: #122400;
+        }
+
+        .myColumn button {
+            display: block; /* Делаем кнопку блочным элементом для центрирования */
+            width: 100%; /* Задаем ширину кнопки равной ширине колонки */
+            margin-top: 20px; /* Добавляем отступ сверху под кнопку */
+            padding: 10px 20px; /* Увеличиваем внутренние отступы кнопки */
+            font-size: 16px; /* Увеличиваем размер шрифта кнопки */
+            background-color: #d8dfbb; /* Изменяем фон кнопки на синий */
+            color: #77804f; /* Изменяем цвет текста кнопки на белый */
+            border: none; /* Убираем границу кнопки */
+            cursor: pointer; /* Изменяем курсор на указатель при наведении */
+        }
+</style>
+
+
+
+<div class="myContainer">
+    <div class="myColumn">
+        <h2>Меню организации</h2>
+        <h3>Используйте функции приложения для администрирования вашего учреждения<br></br></h3>
+        <ul>
+            <li>Создайте организацию</li>
+            <li>Добавляйте предмет</li>
+            <li>Добавляйте преподавателя</li>
+        </ul>
+        <button><a asp-area="" asp-controller="Organizations" asp-action="Registration">Войти в качестве администратора</a></button>
+    </div>
+    <div class="myColumn">
+        <h2>Меню преподавателя</h2>
+        <h3>Используйте функции приложения чтобы управлять вашей преподавательской деятельностью</h3>
+        <ul>
+            <li>Авторизуйтесь</li>
+            <li>Добавляйте занятия</li>
+            <li>Управляйте расписанием</li>
+        </ul>
+        <button id="but"><a asp-area="" asp-controller="Teachers" asp-action="Authorization">Войти в качестве преподавателя</a></button>
+    </div>
+    <div class="myColumn">
+        <h2 id="h203">Меню студента</h2>
+        <h3>Используйте функции приложения чтобы начать учиться<br></br></h3>
+        <ul>
+            <li>Зарегистрируйтесь</li>
+            <li>Записывайтесь на занятия</li>
+            <li>Следите за расписанием</li>
+        </ul>
+        <button><a asp-area="" asp-controller="Students" asp-action="Registration">Войти в качестве студента</a></button>
+    </div>
+</div>

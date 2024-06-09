@@ -1,0 +1,120 @@
+﻿@model MySchedulingVKR.Models.Student
+@{
+    ViewData["Title"] = "ScheduleStudent";
+}
+<style>
+    h1 {
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    a {
+        color: #77804f;
+        text-decoration: none;
+    }
+
+    .centered-content {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .info-section, .action-buttons, .schedule-list {
+        margin-bottom: 20px;
+    }
+
+        .schedule-list table td a {
+            float: right;
+            margin-left: 10px;
+        }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #77804f;
+            color: white;
+        }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Цвет фона для четных строк */
+    }
+
+    .inner-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .inner-table th, .inner-table td {
+            padding: 8px;
+            text-align: center; /* Центрирование текста */
+            border-bottom: 1px solid #ddd;
+        }
+
+        .inner-table th {
+            background-color: #77804f;
+        }
+
+    .full-width-button {
+        width: 100%; /* Кнопка занимает всю ширину строки */
+        display: block; /* Кнопка ведет себя как блочный элемент */
+        background-color: #77804f;
+    }
+
+    .teacher-name-cell {
+        justify-content: center; /* Центрирование по горизонтали */
+        align-items: center; /* Центрирование по вертикали */
+        height: 100%; /* Высота ячейки */
+    }
+</style>
+
+<h1>Расписание занятий cтудента</h1>
+
+<div class="centered-content">
+    <div class="info-section">
+        <h4>Информация о студенте</h4>
+        <dl class="row">
+            <dt class="col-sm-2">
+                Студент
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="action-buttons">
+        <a asp-action="Menu" asp-route-id="@Model.Id">Вернуться в меню</a>
+    </div>
+
+    <div class="schedule-list">
+        <h4>Расписание занятий</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>День недели</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ScheduleStudents.Select(s => s.Schedule))
+                {
+                    <tr>
+                        <td>@item.Lesson.DayOfTheWeek</td>
+                        <td>@item.Lesson.Date</td>
+                        <td>@item.Lesson.Time</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

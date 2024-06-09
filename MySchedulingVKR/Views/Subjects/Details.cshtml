@@ -1,0 +1,23 @@
+﻿@model MySchedulingVKR.Models.Subject
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div style="margin-left: 50px;">
+    <h1>Информация</h1>
+
+    <div>
+        <h4>Предмет</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Название
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
+    </div>
+</div>
+

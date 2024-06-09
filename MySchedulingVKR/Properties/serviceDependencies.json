@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:\"Server=DESKTOP-SD0RFQA;Database=db_Scheduling;TrustServerCertificate=True;Trusted_Connection=True;MultipleActiveResultSets=true\"",
+      "dynamicId": null
+    }
+  }
+}

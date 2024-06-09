@@ -1,0 +1,42 @@
+﻿@model MySchedulingVKR.Models.Lesson
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div style="margin-left: 50px;">
+    <h1>Добавление занятия</h1>
+
+    <h4>Занятие</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="DayOfTheWeek" class="control-label">День недели</label>
+                    <select asp-for="DayOfTheWeek" class="form-control" asp-items="ViewBag.DayOfWeeks"></select>                  
+                    <span asp-validation-for="DayOfTheWeek" class="text-danger"></span><br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Time" class="control-label">Время</label>
+                    <input asp-for="Time" class="form-control" />
+                    <span asp-validation-for="Time" class="text-danger"></span><br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label">Дата</label>
+                    <input asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span><br />
+                </div>
+                <div class="form-group">
+                    <input style="font-size: 16px;" type="submit" value="Добавить" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

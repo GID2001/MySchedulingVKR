@@ -1,0 +1,147 @@
+﻿@model MySchedulingVKR.ViewModels.TeacherViewLesson
+
+@{
+    ViewData["Title"] = "Menu";
+}
+
+<style>
+    h1 {
+        margin-top: 50px;
+        font-size: 32px;
+        text-align: center;
+    }
+
+    h4 {
+        font-size: 26px;
+    }
+
+    a {
+        color: #77804f;
+        text-decoration: none;
+    }
+
+    .centered-content {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .info-section, .action-buttons, .schedule-list {
+        margin-bottom: 20px;
+    }
+
+    .schedule-list table td a{
+        float: right;
+        margin-left: 10px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table th {
+            background-color: #77804f;
+            color: white;
+            border: none;
+        }
+
+</style>
+
+<h1>Меню преподавателя</h1>
+
+<div class="centered-content">
+    <div class="info-section">
+        <h4>Информация о преподавателе</h4>
+
+        <dl class="row">
+            <dt class="col-sm-2">
+                Логин
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Teacher.Login)
+            </dd>
+            <dt class="col-sm-2">
+                Пароль
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Teacher.Password)
+            </dd>
+            <dt class="col-sm-2">
+                Имя
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Teacher.Name)
+            </dd>
+            <dt class="col-sm-2">
+                Фамилия
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Teacher.Surname)
+            </dd>
+            <dt class="col-sm-2">
+                Организация
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Teacher.Organization.Name)
+            </dd>
+            <dt class="col-sm-2">
+                Предмет
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Teacher.Subject.Name)
+            </dd>
+        </dl>
+        <a asp-action="EditTeacher" asp-route-id="@Model.Teacher.Id">Редактировать информацию</a>
+
+    </div>
+
+    <div class="action-buttons">
+        <a asp-action="ScheduleTeachers" asp-route-id="@Model.Teacher.Id">Расписание занятий</a>
+    </div>
+
+    <div class="schedule-list">
+        <h4>График планируемых занятий</h4>
+        <p><a asp-area="" asp-controller="Lessons" asp-action="Create" asp-route-id="">Добавить новое занятие</a></p>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>День недели</th>
+                <th>Время</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Lessons)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DayOfTheWeek)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+                    <td>
+                        <a asp-area="" asp-controller="Lessons" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-area="" asp-controller="Lessons" asp-action="Details" asp-route-id="@item.Id">Details  |</a>
+                        <a asp-area="" asp-controller="Lessons" asp-action="Edit" asp-route-id="@item.Id">Edit  |</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>
+

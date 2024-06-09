@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "",
+      "secretStore": "LocalSecretsFile",
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:\"Server=DESKTOP-SD0RFQA;Database=db_Scheduling;TrustServerCertificate=True;Trusted_Connection=True;MultipleActiveResultSets=true\"",
+      "dynamicId": null
+    }
+  }
+}
